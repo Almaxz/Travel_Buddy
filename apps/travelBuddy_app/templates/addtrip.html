@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Travel Plan</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/addtrip.css' %}">
+</head>
+<body>
+    <h1>Add a Trip</h1>
+    <div>
+        <fieldset>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="/create/{{traveler.id}}" method="post">
+                {% csrf_token %}
+
+                <p>Desination:</p>
+                <input type="text" name="desination"><br>
+
+                <p>Description</p>
+                <textarea name="desc" id="desc" placeholder="Enter a Description" cols="30" rows="5"></textarea><br>
+                
+                <p>Travel Date From:</p>
+                <input type="date" name="start_date"><br>
+                
+                <p>Travel Date To:</p>
+                <input type="date" name="end_date"><br><br>
+ 
+                <center><input type="submit" value="Add Trip"></center>
+            </form>
+            <a href="/travels">Home</a>
+            <a href="/logout">Log Out</a>
+            <br><br>
+        </fieldset>
+    </div>
+</body>
+</html>

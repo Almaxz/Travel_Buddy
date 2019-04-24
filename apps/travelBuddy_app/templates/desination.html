@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Desination</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/desination.css' %}">
+</head>
+<body>
+    <fieldset>
+        <h1> {{trip.desination}} </h1>
+        <p>Planned By: {{trip.plannedby.name}} </p>
+        <p>Description: {{trip.description}} </p>
+        <p>Travel Date From: {{trip.start_date}} </p>
+        <p>Travel Date To: {{trip.end_date}} </p><br><br><br><br>
+
+        <h2>Other Users joining the Trip:</h2>
+        <ul class="messages">
+            {% for joiner in joiners %}
+                {% if joiner.id != trip.plannedby.id %}
+                <p> {{joiner.name}} </p>
+                {% endif %}
+            {% endfor %}
+        </ul><br><br>
+        <a href="/travels"><button>Home</button></a>
+        <a href="/logout"><button>Logout</button></a>
+    </fieldset>
+</body>
+</html> 

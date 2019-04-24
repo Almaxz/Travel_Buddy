@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Travel Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/travels.css' %}">
+</head>
+<body>
+    <fieldset>
+        <h1>Hello, {{traveler.name}}! </h1>
+        <table>
+            <h3>Your Travel Plan</h3>
+            <tr class="thead" style="background-color: #cccccc;">
+                    <td>Desination</td>
+                    <td>Travel Start Date</td>
+                    <td>Travel End Date</td>
+                    <td>Plan</td>
+                    <td>Maybe Another Day?</td>
+                </tr>
+                {% for plans in travel_plans %}
+                <tr>
+                    <td><a href="/desination_info/{{plans.id}}">{{plans.desination}}</a></td>
+                    <td>{{plans.start_date}}</td>
+                    <td>{{plans.end_date}}</td>
+                    <td>{{plans.description}}</td>
+                    {% if plans.plannedby.id == traveler.id %}
+                    <td><a href="/destroy/{{plans.id}}">Cancel</a></td>
+                    {% else %}
+                    <td><a href="/unjoin/{{plans.id}}">Unjoin</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table><br> 
+            <table>
+                <h3>Other Traveler's Travel Plans</h3>
+                <tr class="thead" style="background-color: #cccccc;">
+                        <td>Name</td>
+                        <td>Desination</td>
+                        <td>Travel Start Date</td>
+                        <td>Travel End Date</td>
+                        <td>Do You Want to Join?</td>
+                    </tr>
+                    {% for trips in trip_planned %}
+                    <tr>
+                        <td>{{trips.plannedby.name}}</td>
+                        <td><a href="/desination_info/{{trips.id}}">{{trips.desination}}</a></td>
+                        <td>{{trips.start_date}}</td>
+                        <td>{{trips.end_date}}</td>
+                        {% if travel_plans.plannedby.id != traveler.id %}
+                        <td><a href="/join_trip/{{trips.id}}">Join</a></td>
+                        {% endif %}
+                    </tr>
+                    {%endfor%}
+                </table><br><br>
+                <a href="/travels/add_trip">Add Travel Plan</a>
+                <a href="/logout">Logout</a> 
+            </fieldset>
+        </body>
+        </html>

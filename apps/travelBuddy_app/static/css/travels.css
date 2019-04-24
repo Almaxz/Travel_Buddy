@@ -1,0 +1,21 @@
+* {
+    margin: 0px;
+    padding: 15px;
+}
+body {
+    display: flex;
+    justify-content: space-around;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table tr td {
+    border: 1px solid black;
+}
+
+fieldset {
+    margin-top: 5em;
+}
